@@ -40,6 +40,7 @@ function showScreen(name) {
     el.classList.toggle("active", key === name);
     el.classList.toggle("hidden", key !== name);
   });
+  document.body.classList.toggle("on-answer-screen", name === "answer");
 }
 
 function renderList() {
@@ -50,7 +51,11 @@ function renderList() {
     const li = document.createElement("li");
     const btn = document.createElement("button");
     btn.type = "button";
-    btn.textContent = q.question;
+    btn.className = "question-card";
+    btn.innerHTML =
+      '<span class="question-card__text">' +
+      escapeHtml(q.question) +
+      '</span><span class="question-card__chevron" aria-hidden="true">›</span>';
     btn.addEventListener("click", () => openBearings(q.id));
     li.appendChild(btn);
     questionList.appendChild(li);
@@ -71,8 +76,15 @@ function openBearings(questionId) {
     if (!question.audiences[audienceId]) return;
     const btn = document.createElement("button");
     btn.type = "button";
+    btn.className = "audience-btn";
     btn.textContent = AUDIENCE_LABELS[audienceId];
-    btn.addEventListener("click", () => openAnswer(audienceId));
+    btn.addEventListener("click", () => {
+      audienceButtons.querySelectorAll(".audience-btn").forEach((b) => {
+        b.classList.remove("selected");
+      });
+      btn.classList.add("selected");
+      setTimeout(() => openAnswer(audienceId), 200);
+    });
     audienceButtons.appendChild(btn);
   });
 
@@ -86,8 +98,12 @@ function openAnswer(audienceId) {
 }
 
 function switchAudience(audienceId) {
-  state.audience = audienceId;
-  renderAnswer();
+  answerContent.classList.add("fading");
+  setTimeout(() => {
+    state.audience = audienceId;
+    renderAnswer();
+    answerContent.classList.remove("fading");
+  }, 120);
 }
 
 function renderAnswer() {

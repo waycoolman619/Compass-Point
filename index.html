@@ -3,11 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0B132B">
+  <meta name="color-scheme" content="dark">
   <title>The Compass Point</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header>
+  <header class="app-header">
+    <div class="logo-mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" class="compass-icon">
+        <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <polygon points="12,4 14,12 12,20 10,12" fill="currentColor"/>
+        <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
+      </svg>
+    </div>
     <h1>The Compass Point</h1>
   </header>
 
@@ -15,12 +27,18 @@
     <!-- Screen 1: Question list -->
     <section id="screen-list" class="screen active">
       <p class="subtitle">Foundational Questions</p>
-      <input
-        type="search"
-        id="search"
-        placeholder="Search questions..."
-        autocomplete="off"
-      >
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
+          <line x1="16.5" y1="16.5" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <input
+          type="search"
+          id="search"
+          placeholder="Search questions..."
+          autocomplete="off"
+        >
+      </div>
       <ul id="question-list"></ul>
       <p id="no-results" class="empty hidden">No questions match your search.</p>
     </section>
@@ -30,29 +48,35 @@
       <p class="label">The Bearings</p>
       <h2>Who are you talking to?</h2>
       <p id="bearings-question" class="bearings-question"></p>
-      <div id="audience-buttons" class="button-group"></div>
+      <div id="audience-buttons" class="audience-grid"></div>
       <button type="button" id="bearings-back" class="text-button">← Back to questions</button>
     </section>
 
     <!-- Screen 3: Tailored answer -->
     <section id="screen-answer" class="screen hidden">
-      <button type="button" id="answer-back" class="text-button">← Back to questions</button>
-      <h2 id="answer-question"></h2>
-      <p id="answer-audience" class="audience-tag"></p>
+      <div class="answer-scroll">
+        <button type="button" id="answer-back" class="text-button">← Back to questions</button>
+        <h2 id="answer-question"></h2>
+        <p id="answer-audience" class="audience-tag"></p>
 
-      <div id="answer-content">
-        <h3 class="section-label">Strategy</h3>
-        <p id="answer-strategy"></p>
+        <div id="answer-content">
+          <div class="strategy-block">
+            <h3 class="section-label">Strategy</h3>
+            <p id="answer-strategy"></p>
+          </div>
 
-        <h3 class="section-label">Talking Points</h3>
-        <ul id="answer-points"></ul>
+          <div class="talking-points-block">
+            <h3 class="section-label">Talking Points</h3>
+            <ul id="answer-points"></ul>
+          </div>
+        </div>
+        <p id="answer-empty" class="empty hidden">No answer available for this audience.</p>
       </div>
-      <p id="answer-empty" class="empty hidden">No answer available for this audience.</p>
 
-      <div class="cross-ref">
-        <p class="label">Cross-References</p>
+      <nav class="cross-ref-sticky" aria-label="Cross-References">
+        <p class="cross-ref-sticky__label">Cross-References</p>
         <div id="cross-ref-bar" class="chip-row"></div>
-      </div>
+      </nav>
     </section>
   </main>
 
