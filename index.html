@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Compass Point</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>The Compass Point</h1>
+  </header>
+
+  <main>
+    <!-- Screen 1: Question list -->
+    <section id="screen-list" class="screen active">
+      <p class="subtitle">Foundational Questions</p>
+      <input
+        type="search"
+        id="search"
+        placeholder="Search questions..."
+        autocomplete="off"
+      >
+      <ul id="question-list"></ul>
+      <p id="no-results" class="empty hidden">No questions match your search.</p>
+    </section>
+
+    <!-- Screen 2: Audience selector (The Bearings) -->
+    <section id="screen-bearings" class="screen hidden">
+      <p class="label">The Bearings</p>
+      <h2>Who are you talking to?</h2>
+      <p id="bearings-question" class="bearings-question"></p>
+      <div id="audience-buttons" class="button-group"></div>
+      <button type="button" id="bearings-back" class="text-button">← Back to questions</button>
+    </section>
+
+    <!-- Screen 3: Tailored answer -->
+    <section id="screen-answer" class="screen hidden">
+      <button type="button" id="answer-back" class="text-button">← Back to questions</button>
+      <h2 id="answer-question"></h2>
+      <p id="answer-audience" class="audience-tag"></p>
+
+      <div id="answer-content">
+        <h3 class="section-label">Strategy</h3>
+        <p id="answer-strategy"></p>
+
+        <h3 class="section-label">Talking Points</h3>
+        <ul id="answer-points"></ul>
+      </div>
+      <p id="answer-empty" class="empty hidden">No answer available for this audience.</p>
+
+      <div class="cross-ref">
+        <p class="label">Cross-References</p>
+        <div id="cross-ref-bar" class="chip-row"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
